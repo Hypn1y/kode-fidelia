@@ -1,9 +1,9 @@
 import streamlit as st
 
-x = st.number_input("Masukkan angka")
-sx = st.text_input("Satuan", "C")
-st.write ("Anda memasukkan", x, ' ', sx)
+x1 = st.number_input("Masukkan angka 1")
+sx1 = st.text_input("Satuan 1", "C")
+st.write ("Anda memasukkan", x1, ' ', sx1)
 
-y = st.number_input("Masukkan angka")
-sy = st.text_input("Satuan", "C")
-st.write ("Anda memasukkan", y, ' ', sy)
+x2 = st.number_input("Masukkan angka 2")
+s2 = st.text_input("Satuan 2", "C")
+st.write ("Anda memasukkan", x2, ' ', sx2)
