@@ -9,5 +9,4 @@ if (sx == 'C'):
   if(sy == 'C'):
     y = x
   elif(sy == 'F'):
-    pass
 st.write (x, ' ', sx, ' = ', y , sy)
