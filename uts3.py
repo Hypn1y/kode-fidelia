@@ -13,14 +13,14 @@ color = []
 size = []
 x.append(0)
 y.append(0)
-color.append((0.,.7,0.))
+color.append((0., .7, 0.))
 size.append(371)
 
-# Fungsi untuk menempatkan lingkaran kecil di tepi lingkaran besar
-def place_on_big_circle(small_radius, big_radius=1):
+# Fungsi untuk menempatkan lingkaran kecil agar menyentuh lingkaran besar
+def place_touching_big_circle(small_radius, big_radius=1):
     # Pilih sudut acak
     angle = random.uniform(0, 2 * np.pi)
-    # Tempatkan lingkaran kecil pada garis lingkaran besar
+    # Tempatkan lingkaran kecil sehingga menyentuh garis lingkaran besar
     x0 = (big_radius - small_radius) * np.cos(angle)
     y0 = (big_radius - small_radius) * np.sin(angle)
     return x0, y0
@@ -30,8 +30,8 @@ if st.button("Click"):
         # Radius acak untuk lingkaran kecil
         small_radius = random.uniform(0.05, 0.2)
         
-        # Tempatkan lingkaran kecil tepat di tepi lingkaran besar
-        x0, y0 = place_on_big_circle(small_radius)
+        # Tempatkan lingkaran kecil tepat menyentuh lingkaran besar
+        x0, y0 = place_touching_big_circle(small_radius)
         
         # Tambahkan ke daftar
         x.append(x0)
@@ -52,7 +52,7 @@ ax.set_ylabel("y")
 ax.set_xlabel("x")
 ax.tick_params(axis='y', labelsize=20)
 ax.tick_params(axis='x', labelsize=15)
-ax.set_title('Lingkaran Kecil di Garis Lingkaran Besar')
+ax.set_title('Lingkaran Kecil Menyentuh Garis Lingkaran Besar')
 ax.grid(True, linestyle='-.')
 ax.tick_params(labelcolor='r', labelsize='medium', width=3)
 ax.set_xlim([-1, 1])
@@ -62,7 +62,7 @@ ax.set_ylim([-1, 1])
 st.pyplot(fig)
 
 # Tambahan keterangan dan pembatas
-st.caption("Lingkaran kecil berada tepat di garis lingkaran besar")
+st.caption("Lingkaran kecil menyentuh garis lingkaran besar")
 st.divider()
 st.text("UTS menggunakan GitHub dan Streamlit.")
 st.divider()
