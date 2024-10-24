@@ -14,8 +14,12 @@ def generate_random_circle_data():
 st.title("Lingkaran Acak yang Berubah Setiap Kali Tombol Ditekan 😄")
 
 # Tombol untuk memperbarui data
-if st.button('Generate New Data'):
+if st.button('Data'):
     angles, radii, sizes = generate_random_circle_data()
+
+    fig, ax = plt.subplots()
+    ax.set_xlim([-1, 1])
+    ax.set_ylim([-1, 1])
 
     # Membuat plot lingkaran acak
     fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
