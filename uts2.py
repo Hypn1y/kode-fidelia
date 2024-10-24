@@ -1,37 +1,52 @@
 import streamlit as st
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 
-# Fungsi untuk menghasilkan data lingkaran kecil yang berada di dalam lingkaran besar
-def generate_inner_circle_data():
-    num_circles = 50
-    angles = np.random.uniform(0, 2 * np.pi, num_circles)
-    radii = np.random.uniform(0, 1, num_circles)  # Radius di dalam lingkaran besar
-    x = radii * np.cos(angles)
-    y = radii * np.sin(angles)
-    sizes = np.random.rand(num_circles) * 100  # Ukuran lingkaran kecil
-    colors = np.random.rand(num_circles, 3)  # Warna acak (RGB)
-    return x, y, sizes, colors
+# Fungsi untuk memeriksa apakah lingkaran kecil berada di dalam lingkaran besar
+def is_inside_big_circle(x, y, big_radius):
+    return np.sqrt(x**2 + y**2) + 0.1 <= big_radius
 
-# Header aplikasi
-st.title("Lingkaran Besar dengan Lingkaran Kecil di Dalamnya 🔵")
-
-# Tombol untuk memperbarui data
-if st.button('Generate New Data'):
-    # Data lingkaran kecil
-    x, y, sizes, colors = generate_inner_circle_data()
-
-    # Membuat plot dengan lingkaran besar di tengah
+# Fungsi untuk menggambar lingkaran besar dan lingkaran-lingkaran kecil di dalamnya
+def plot_circles():
     fig, ax = plt.subplots()
-    ax.set_xlim([-1.5, 1.5])
-    ax.set_ylim([-1.5, 1.5])
-
-    # Plot lingkaran besar
-    big_circle = plt.Circle((0, 0), 1, color='lightblue', fill=False, linewidth=2)
-    ax.add_artist(big_circle)
-
-    # Plot lingkaran-lingkaran kecil di dalam lingkaran besar
-    ax.scatter(x, y, s=sizes, c=colors, alpha=0.6)
-
-    # Menampilkan plot
+    
+    # Lingkaran besar dengan radius 1
+    big_circle = Circle((0, 0), 1, color='lightblue', fill=False, linewidth=2)
+    ax.add_patch(big_circle)
+    
+    # Lingkaran-lingkaran kecil dengan lokasi, ukuran, dan warna acak
+    num_small_circles = 10
+    for _ in range(num_small_circles):
+        while True:
+            # Koordinat acak untuk lingkaran kecil
+            x = np.random.uniform(-1, 1)
+            y = np.random.uniform(-1, 1)
+            
+            # Memastikan lingkaran kecil berada di dalam lingkaran besar
+            if is_inside_big_circle(x, y, 1):
+                break
+        
+        # Ukuran dan warna acak untuk lingkaran kecil
+        small_radius = np.random.uniform(0.05, 0.2)
+        color = np.random.rand(3,)
+        
+        # Tambahkan lingkaran kecil
+        small_circle = Circle((x, y), small_radius, color=color, fill=True)
+        ax.add_patch(small_circle)
+    
+    # Setting tampilan plot
+    ax.set_aspect('equal')
+    ax.set_xlim(-1.2, 1.2)
+    ax.set_ylim(-1.2, 1.2)
+    ax.set_title('Lingkaran dengan Lingkaran Kecil di Dalamnya')
+    plt.grid(False)
+    plt.axis('off')
+    
     st.pyplot(fig)
+
+# Judul aplikasi
+st.title("Lingkaran dan Lingkaran-Lingkaran Kecil di Dalamnya")
+
+# Tampilkan lingkaran
+plot_circles()
