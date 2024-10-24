@@ -7,7 +7,7 @@ from matplotlib.patches import Circle
 
 st.title("Fisika Komputasi Awan")
 st.title("Enrico Frans Ganya")
-circle = Circle((0, 0), 1, color='red', fill=False, linewidth=2, linestyle='-', alpha=0.3)
+circle = Circle((0, 0), 1, color='red', fill=False, linewidth=2, linestyle='-', alpha=0.5)
 x = []
 y = []
 color = []
@@ -35,7 +35,7 @@ fig, ax = plt.subplots(figsize=(16, 16))
 ax.add_patch(circle)
 
 for i in range(1, len(x)):
-    ax.plot([0, x[i]], [0, y[i]], color='green', linestyle='--', alpha=0.2)
+    ax.plot([0, x[i]], [0, y[i]], color='green', linestyle='--', alpha=0.5)
 
 ax.scatter(x, y, c=color, s=size, alpha=0.5) 
 
