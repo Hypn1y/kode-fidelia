@@ -15,9 +15,8 @@ st.title("Lingkaran Acak yang Berubah Setiap Kali Tombol Ditekan 😄")
 
 # Tombol untuk memperbarui data
 if st.button('Data'):
-    angles, radii, sizes = generate_random_circle_data()
+    x, y, sizes = generate_random_circle_data()
 
-    x, y, sizes, colors = generate_inner_circle_data()
     fig, ax = plt.subplots()
     ax.set_xlim([-1, 1])
     ax.set_ylim([-1, 1])
