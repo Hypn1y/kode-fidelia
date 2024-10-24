@@ -1,32 +1,30 @@
 import streamlit as st
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Fungsi untuk membuat data acak
-def generate_random_data():
-    num_points = np.random.randint(10, 100)  # Jumlah titik acak
-    x = np.random.uniform(-1, 1, num_points)  # Posisi x acak
-    y = np.random.uniform(-1, 1, num_points)  # Posisi y acak
-    sizes = np.random.uniform(10, 300, num_points)  # Ukuran acak
-    return x, y, sizes
+# Fungsi untuk menghasilkan data lingkaran acak dengan radius 1
+def generate_random_circle_data():
+    num_circles = 50
+    x = np.random.uniform(-1, 1, num_circles)
+    y = np.random.uniform(-1, 1, num_circles)
+    sizes = np.random.rand(num_circles) * 300  # Ukuran lingkaran acak
+    colors = np.random.rand(num_circles, 3)    # Warna acak (RGB)
+    return x, y, sizes, colors
 
-# Judul aplikasi
-st.title("Data Acak dengan Lingkaran Berukuran Berbeda 🎨")
+# Header aplikasi
+st.title("Lingkaran Acak Berwarna-warni yang Berubah Setiap Kali Tombol Ditekan 🌈")
 
 # Tombol untuk memperbarui data
-if st.button('Generate Data Baru'):
-    x, y, sizes = generate_random_data()  # Menghasilkan data baru
+if st.button('Generate New Data'):
+    x, y, sizes, colors = generate_random_circle_data()
 
-    # Membuat plot lingkaran dengan Matplotlib
+    # Membuat plot lingkaran acak dengan radius 1
     fig, ax = plt.subplots()
-    ax.scatter(x, y, s=sizes, alpha=0.5)
-    
-    # Mengatur batas sumbu dan lingkaran luar
-    ax.set_xlim(-1, 1)
-    ax.set_ylim(-1, 1)
-    ax.set_aspect('equal')
-    circle = plt.Circle((0, 0), 1, color='red', fill=False, linestyle='--', alpha=0.3)
-    ax.add_artist(circle)
+    ax.set_xlim([-1, 1])
+    ax.set_ylim([-1, 1])
 
-    # Menampilkan plot di Streamlit
+    # Plot lingkaran dengan warna acak
+    ax.scatter(x, y, s=sizes, c=colors, alpha=0.6)
+
+    # Menampilkan plot
     st.pyplot(fig)
