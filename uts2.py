@@ -12,11 +12,17 @@ def generate_random_circle_data():
     return x, y, sizes, colors
 
 # Header aplikasi
-st.title("Lingkaran Acak Berwarna-warni yang Berubah Setiap Kali Tombol Ditekan 🌈")
+st.title("Lingkaran Acak dengan Satu Lingkaran di Tengah 🎯")
 
 # Tombol untuk memperbarui data
 if st.button('Generate New Data'):
     x, y, sizes, colors = generate_random_circle_data()
+
+    # Menambahkan lingkaran di pusat (0, 0) dengan ukuran tetap
+    x = np.append(x, 0)
+    y = np.append(y, 0)
+    sizes = np.append(sizes, 500)  # Ukuran lingkaran di tengah
+    colors = np.vstack([colors, [0, 1, 0]])  # Warna hijau untuk lingkaran di tengah
 
     # Membuat plot lingkaran acak dengan radius 1
     fig, ax = plt.subplots()
